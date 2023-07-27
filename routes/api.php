@@ -32,6 +32,7 @@ Route::prefix("v1")->group(function () {
         Route::post("logout", [ApiAuthController::class, 'logout']);
         Route::post("logout-all", [ApiAuthController::class, 'logoutAll']);
         Route::get("devices", [ApiAuthController::class, 'devices']);
+        Route::get('keywords', [ContactController::class, 'keywords']);
 
         Route::apiResource('favourite', FavouriteController::class);
         

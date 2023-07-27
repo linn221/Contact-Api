@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ContactDetailResource;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
+use App\Models\SearchRecord;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +24,15 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::latest("id")->paginate(5)->withQueryString();
+        $contacts = Contact::when(request()->has('keyword'), function($query) {
+            $keyword = request()->keyword;
+            $query->where('name', 'like', "%$keyword%");
+            $search_record = new SearchRecord;
+            $search_record->user_id = Auth::id();
+            $search_record->keyword = $keyword;
+            $search_record->save();
+        })->
+        latest("id")-> paginate(5)->withQueryString();
         return ContactResource::collection($contacts);
     }
 
@@ -114,6 +124,11 @@ class ContactController extends Controller
         return new ContactDetailResource($contact);
     }
 
+    public function keywords() {
+        $search_records = Auth::user()->searchRecords;
+        return response()->json($search_records);
+
+    }
     /**
      * Remove the specified resource from storage.
      */

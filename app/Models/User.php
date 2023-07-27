@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function favourites() {
         return $this->hasMany(Favourite::class);
     }
+
+    public function searchRecords() {
+        return $this->hasMany(SearchRecord::class);
+    }
 }
