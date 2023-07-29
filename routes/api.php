@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\SearchRecordController;
 use App\Http\Middleware\ApiTokenCheck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +33,10 @@ Route::prefix("v1")->group(function () {
         Route::post("logout", [ApiAuthController::class, 'logout']);
         Route::post("logout-all", [ApiAuthController::class, 'logoutAll']);
         Route::get("devices", [ApiAuthController::class, 'devices']);
-        Route::get('keywords', [ContactController::class, 'keywords']);
 
         Route::apiResource('favourite', FavouriteController::class)->only(['index', 'store', 'destroy']);
+        Route::get("search-history", [SearchRecordController::class, 'index']);
+        Route::delete("search-history/{record}", [SearchRecordController::class, 'destroy']);
         
     });
 
