@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FavouriteResource;
 use App\Models\Favourite;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class FavouriteController extends Controller
     public function index()
     {
         $favourites = Auth::user()->favourites;
-        return response()->json($favourites);
+        return FavouriteResource::collection($favourites);
     }
 
     /**
@@ -42,7 +43,7 @@ class FavouriteController extends Controller
     {
         $favourite = Favourite::find($id);
         $favourite->delete();
-        return response()->json(Auth::user()->favourites);
+        return FavouriteResource::collection(Auth::user()->favourites);
     }
 
     /**
