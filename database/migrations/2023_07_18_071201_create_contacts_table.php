@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("country_code");
             $table->string("phone_number");
             $table->foreignId("user_id");
-
             $table->string("email")->nullable();
             $table->string("company")->nullable();
             $table->string("job_title")->nullable();
@@ -25,6 +24,7 @@ return new class extends Migration
             $table->text("notes")->nullable();
             $table->string("photo")->default(config("info.default_contact_photo"));
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

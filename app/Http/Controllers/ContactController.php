@@ -36,6 +36,11 @@ class ContactController extends Controller
         return ContactResource::collection($contacts);
     }
 
+    public function trashedIndex()
+    {
+
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -76,6 +81,12 @@ class ContactController extends Controller
         // ]);
         return new ContactDetailResource($contact);
     }
+
+    public function trashedShow(string $id)
+    {
+
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -124,6 +135,10 @@ class ContactController extends Controller
         return new ContactDetailResource($contact);
     }
 
+    public function restore(string $id) {
+
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -143,5 +158,9 @@ class ContactController extends Controller
         return response()->json([
             "message" => "Contact is deleted",
         ]);
+    }
+
+    public function forceDelete(string $id) {
+
     }
 }

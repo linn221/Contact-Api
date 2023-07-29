@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\SearchRecordController;
 use App\Http\Middleware\ApiTokenCheck;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,11 @@ Route::prefix("v1")->group(function () {
         Route::get("search-history", [SearchRecordController::class, 'index']);
         Route::delete("search-history/{record}", [SearchRecordController::class, 'destroy']);
         
+        // routes for soft deleting action
+        Route::get('trashed-contact', [ContactController::class, 'trashedIndex']);
+        Route::get('trashed-contact/{id}', [ContactController::class, 'trashedShow']);
+        Route::get('restore-contact/{id}', [ContactController::class, 'restore']);
+        Route::delete('trashed-contact/{id}', [ContactController::class, 'forceDelete']);
     });
 
 
