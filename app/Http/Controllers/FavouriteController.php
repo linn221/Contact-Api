@@ -26,12 +26,23 @@ class FavouriteController extends Controller
         $request->validate([
             'contact_id' => 'required|exists:contacts,id'
         ]);
-        $fav = new Favourite;
-        $fav->user_id = Auth::id();
-        $fav->contact_id = $request->contact_id;
-        $fav->save();
+
+        $fav = Favourite::firstOrCreate([
+            'user_id' => Auth::id(),
+            'contact_id' => $request->contact_id
+        ]);
         return response()->json($fav);
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $favourite = Favourite::find($id);
+        $favourite->delete();
+        return response()->json(Auth::user()->favourites);
     }
 
     /**
@@ -50,13 +61,4 @@ class FavouriteController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $favourite = Favourite::find($id);
-        $favourite->delete();
-        return response()->json(Auth::user()->favourites);
-    }
 }

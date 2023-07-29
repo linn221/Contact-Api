@@ -34,7 +34,7 @@ Route::prefix("v1")->group(function () {
         Route::get("devices", [ApiAuthController::class, 'devices']);
         Route::get('keywords', [ContactController::class, 'keywords']);
 
-        Route::apiResource('favourite', FavouriteController::class);
+        Route::apiResource('favourite', FavouriteController::class)->only(['index', 'store', 'destroy']);
         
     });
 

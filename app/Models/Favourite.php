@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Favourite extends Model
 {
     use HasFactory;
+    protected $fillable = ['user_id', 'contact_id'];
+
+    public function contact() {
+        return $this->belongsTo(Contact::class);
+    }
 }
