@@ -42,24 +42,14 @@ class FavouriteController extends Controller
     public function destroy(string $id)
     {
         $favourite = Favourite::find($id);
+        if (is_null($favourite)) {
+            return response()->json([
+                'message' => 'favourite not found'
+            ], 404);
+        }
         $favourite->delete();
-        return FavouriteResource::collection(Auth::user()->favourites);
+        return response()->json([
+            'message' => 'favourite deleted'
+        ], 204);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
 }

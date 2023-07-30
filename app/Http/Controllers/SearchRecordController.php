@@ -15,9 +15,17 @@ class SearchRecordController extends Controller
         return $records;
     }
 
-    public function destroy(SearchRecord $record)
+    public function destroy(string $id)
     {
+        $record = SearchRecord::find($id);
+        if (is_null($record)) {
+            return response()->json([
+                'message' => 'record not found'
+            ], 404);
+        }
         $record->delete();
-        return Auth::user()->searchRecords;
+        return response()->json([
+            'message' => 'record deleted'
+        ], 204);
     }
 }

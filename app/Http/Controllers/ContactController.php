@@ -196,7 +196,7 @@ class ContactController extends Controller
         // return response()->json([],204);
         return response()->json([
             "message" => "Contact is deleted",
-        ]);
+        ], 204);
     }
 
     public function forceDelete(string $id)
