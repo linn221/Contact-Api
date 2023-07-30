@@ -24,21 +24,36 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::when(request()->has('keyword'), function($query) {
+        $contacts = Contact::when(request()->has('keyword'), function ($query) {
             $keyword = request()->keyword;
             $query->where('name', 'like', "%$keyword%");
+
             $search_record = SearchRecord::create([
                 'user_id' => Auth::id(),
                 'keyword' => $keyword
             ]);
-        })->
-        latest("id")-> paginate(5)->withQueryString();
+        })
+        ->when(request()->query('trashed'), function ($query) {
+            $query->withTrashed();
+        })
+        ->latest("id")->paginate(5)->withQueryString();
+
         return ContactResource::collection($contacts);
     }
 
     public function trashedIndex()
     {
-
+        $contacts = Contact::onlyTrashed()
+            ->when(request()->has('keyword'), function ($query) {
+                $keyword = request()->keyword;
+                $query->where('name', 'like', "%$keyword%");
+                $search_record = SearchRecord::create([
+                    'user_id' => Auth::id(),
+                    'keyword' => $keyword
+                ]);
+            })
+            ->latest("id")->paginate(5)->withQueryString();
+        return ContactResource::collection($contacts);
     }
 
     /**
@@ -68,12 +83,12 @@ class ContactController extends Controller
     public function show(string $id)
     {
         $contact = Contact::find($id);
-        if(is_null($contact)){
+        if (is_null($contact)) {
             return response()->json([
                 // "success" => false,
                 "message" => "Contact not found",
 
-            ],404);
+            ], 404);
         }
 
         // return response()->json([
@@ -84,7 +99,19 @@ class ContactController extends Controller
 
     public function trashedShow(string $id)
     {
+        $contact = Contact::onlyTrashed()->where('id', $id)->first();
+        if (is_null($contact)) {
+            return response()->json([
+                // "success" => false,
+                "message" => "Contact not found",
 
+            ], 404);
+        }
+
+        // return response()->json([
+        //     "data" => $contact
+        // ]);
+        return new ContactDetailResource($contact);
     }
 
 
@@ -100,12 +127,12 @@ class ContactController extends Controller
         ]);
 
         $contact = Contact::find($id);
-        if(is_null($contact)){
+        if (is_null($contact)) {
             return response()->json([
                 // "success" => false,
                 "message" => "Contact not found",
 
-            ],404);
+            ], 404);
         }
 
         // $contact->update([
@@ -116,15 +143,15 @@ class ContactController extends Controller
 
         // $contact->update($request->all());
 
-        if($request->has('name')){
+        if ($request->has('name')) {
             $contact->name = $request->name;
         }
 
-        if($request->has('country_code')){
+        if ($request->has('country_code')) {
             $contact->country_code = $request->country_code;
         }
 
-        if($request->has('phone_number')){
+        if ($request->has('phone_number')) {
             $contact->phone_number = $request->phone_number;
         }
 
@@ -135,8 +162,20 @@ class ContactController extends Controller
         return new ContactDetailResource($contact);
     }
 
-    public function restore(string $id) {
+    public function restore(string $id)
+    {
+        $contact = Contact::onlyTrashed()->where('id', $id)->first();
+        if (is_null($contact)) {
+            return response()->json([
+                // "success" => false,
+                "message" => "Contact not found",
 
+            ], 404);
+        }
+
+        $contact->restore();
+
+        return new ContactDetailResource($contact);
     }
 
     /**
@@ -145,12 +184,12 @@ class ContactController extends Controller
     public function destroy(string $id)
     {
         $contact = Contact::find($id);
-        if(is_null($contact)){
+        if (is_null($contact)) {
             return response()->json([
                 // "success" => false,
                 "message" => "Contact not found",
 
-            ],404);
+            ], 404);
         }
         $contact->delete();
 
@@ -160,7 +199,20 @@ class ContactController extends Controller
         ]);
     }
 
-    public function forceDelete(string $id) {
+    public function forceDelete(string $id)
+    {
+        $contact = Contact::onlyTrashed()->where('id', $id)->first();
+        if (is_null($contact)) {
+            return response()->json([
+                // "success" => false,
+                "message" => "Contact not found or not soft deleted",
 
+            ], 404);
+        }
+
+        $contact->forceDelete();
+        return response()->json([
+            "message" => 'Contact has been force deleted!',
+        ], 204);
     }
 }
