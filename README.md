@@ -22,6 +22,12 @@ DELETE  api://search-history/{{id}}
 ----------------------------------------------------------------
 
 ### clear search history
+```http
+DELETE  api://search-history
+```
+
+----------------------------------------------------------------
+
 ## Favourites
 ### Favourite a contact
 

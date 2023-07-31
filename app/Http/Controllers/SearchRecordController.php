@@ -28,4 +28,13 @@ class SearchRecordController extends Controller
             'message' => 'record deleted'
         ], 204);
     }
+
+    public function clear()
+    {
+        SearchRecord::where('user_id', Auth::id())->delete();
+        return response()->json([
+            'message' => 'search history deleted'
+        ], 204);
+    }
+
 }

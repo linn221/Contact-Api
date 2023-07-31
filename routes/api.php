@@ -38,6 +38,7 @@ Route::prefix("v1")->group(function () {
         Route::apiResource('favourite', FavouriteController::class)->only(['index', 'store', 'destroy']);
         Route::get("search-history", [SearchRecordController::class, 'index']);
         Route::delete("search-history/{id}", [SearchRecordController::class, 'destroy']);
+        Route::delete("search-history", [SearchRecordController::class, 'clear']);
         
         // routes for soft deleting action
         Route::get('trashed-contact', [ContactController::class, 'trashedIndex']);
