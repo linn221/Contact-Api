@@ -1,10 +1,32 @@
 # Lara Contact Api
-## Favourite
 
+## Search contacts
+### search by keyword
+```http
+GET  api://contact?keyword={{keyword}}
+```
+----------------------------------------------------------------
+
+### show search records
+```http
+GET  api://search-history
+```
+
+----------------------------------------------------------------
+
+### delete search records
+```http
+DELETE  api://search-history/{{id}}
+```
+
+----------------------------------------------------------------
+
+### clear search history
+## Favourites
 ### Favourite a contact
 
 ```http
-POST  {{base_url}}/favourite
+POST  api://favourite
 ```
 #### form-data
 | Key            | Value        | Description                |
@@ -15,14 +37,14 @@ POST  {{base_url}}/favourite
 
 ### List favourites
 ```http
-GET  {{base_url}}/favourite
+GET  api://favourite
 ```
 
 ----------------------------------------------------------------
 
 ### Remove favourite
 ```http
-DELETE  {{base_url}}/favourite/{{contact_id}}
+DELETE  api://favourite/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
@@ -31,21 +53,35 @@ DELETE  {{base_url}}/favourite/{{contact_id}}
 
 ### List deleted contacts
 ```http
-GET  {{base_url}}/trashed-contact
+GET  api://trashed-contact
+```
+
+----------------------------------------------------------------
+
+### List contacts including deleted ones
+```http
+GET  api://contact?trashed
 ```
 
 ----------------------------------------------------------------
 
 ### Show deleted contact
 ```http
-GET  {{base_url}}/trashed-contact/{{contact_id}}
+GET  api://trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
 ### Restore deleted contact
 ```http
-GET  {{base_url}}/trashed-contact/{{contact_id}}
+GET  api://trashed-contact/{{contact_id}}
+```
+
+----------------------------------------------------------------
+
+### Parmanently delete contact
+```http
+DELETE  api://trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
@@ -54,7 +90,7 @@ GET  {{base_url}}/trashed-contact/{{contact_id}}
 
 ### request name
 ```http
-POST  {{base_url}}/f
+POST  api://f
 ```
 #### form-data
 | Key       | Value    | Description                |
