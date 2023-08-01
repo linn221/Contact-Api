@@ -1,38 +1,39 @@
 # Lara Contact Api
 
 ## Search contacts
-### search by keyword
+### search by keyword **GET**
 ```http
-GET  http://127.0.0.1/api/v1/contact?keyword={{keyword}}
-```
-----------------------------------------------------------------
-
-### show search records
-```http
-GET  http://127.0.0.1/api/v1/search-history
+http://127.0.0.1/api/v1/contact?keyword={{keyword}}
 ```
 
 ----------------------------------------------------------------
 
-### delete search records
+### show search records **GET**
 ```http
-DELETE  http://127.0.0.1/api/v1/search-history/{{id}}
+http://127.0.0.1/api/v1/search-history
 ```
 
 ----------------------------------------------------------------
 
-### clear search history
+### delete search records **DELETE**
 ```http
-DELETE  http://127.0.0.1/api/v1/search-history/reset
+http://127.0.0.1/api/v1/search-history/{{id}}
+```
+
+----------------------------------------------------------------
+
+### clear search history **DELETE**
+```http
+ http://127.0.0.1/api/v1/search-history/reset
 ```
 
 ----------------------------------------------------------------
 
 ## Favourites
-### Favourite a contact
+### Favourite a contact **GET**
 
 ```http
-POST  http://127.0.0.1/api/v1/favourite
+http://127.0.0.1/api/v1/favourite
 ```
 #### form-data
 | Key            | Value        | Description                |
@@ -41,67 +42,67 @@ POST  http://127.0.0.1/api/v1/favourite
 
 ----------------------------------------------------------------
 
-### List favourites
+### List favourites **GET**
 ```http
-GET  http://127.0.0.1/api/v1/favourite
+ http://127.0.0.1/api/v1/favourite
 ```
 
 ----------------------------------------------------------------
 
-### Remove favourite
+### Remove favourite **DELETE**
 ```http
-DELETE  http://127.0.0.1/api/v1/favourite/{{contact_id}}
+ http://127.0.0.1/api/v1/favourite/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Remove all favourites
+### Remove all favourites **DELETE**
 ```http
-DELETE  http://127.0.0.1/api/v1/favourite/reset
+ http://127.0.0.1/api/v1/favourite/reset
 ```
 
 ----------------------------------------------------------------
 
 ## Soft deleting
 
-### List deleted contacts
+### List deleted contacts **GET**
 ```http
-GET  http://127.0.0.1/api/v1/trashed-contact
+ http://127.0.0.1/api/v1/trashed-contact
 ```
 
 ----------------------------------------------------------------
 
-### List contacts including deleted ones
+### List contacts including deleted ones **GET**
 ```http
-GET  http://127.0.0.1/api/v1/contact?trashed
+ http://127.0.0.1/api/v1/contact?trashed
 ```
 
 ----------------------------------------------------------------
 
-### Show deleted contact
+### Show deleted contact **GET**
 ```http
-GET  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
+ http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Restore deleted contact
+### Restore deleted contact **GET**
 ```http
-GET  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
+ http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Parmanently delete contact
+### Parmanently delete contact **DELETE**
 ```http
-DELETE  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
+ http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Clear trashed contacts
+### Clear trashed contacts **DELETE**
 ```http
-DELETE  http://127.0.0.1/api/v1/trashed-contact/reset
+ http://127.0.0.1/api/v1/trashed-contact/reset
 ```
 ----------------------------------------------------------------
 
