@@ -35,6 +35,7 @@ Route::prefix("v1")->group(function () {
         Route::get("devices", [ApiAuthController::class, 'devices']);
 
         // Contacts
+        Route::post('contact/bulk-delete', [ContactController::class, 'bulkDelete']);
         Route::apiResource('contact', ContactController::class);
 
         // Favourite
@@ -47,11 +48,12 @@ Route::prefix("v1")->group(function () {
         Route::delete("search-history/reset", [SearchRecordController::class, 'reset'])->name('search-history.reset');
 
         // Soft Delete
+        Route::delete('trashed-contact/reset', [ContactController::class, 'reset'])->name('trashed.reset');
+        Route::get('trashed-contact/restore', [ContactController::class, 'restoreAll']);
         Route::get('trashed-contact', [ContactController::class, 'trashedIndex'])->name('trashed.index');
         Route::get('trashed-contact/{id}', [ContactController::class, 'trashedShow'])->name('trashed.show');
         Route::get('restore-contact/{id}', [ContactController::class, 'restore'])->name('trashed.restore');
         Route::delete('trashed-contact/{id}', [ContactController::class, 'forceDelete'])->name('trashed.destroy');
-        Route::delete('trashed-contact/reset', [ContactController::class, 'reset'])->name('trashed.reset');
     });
 
 

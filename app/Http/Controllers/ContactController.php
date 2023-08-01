@@ -232,4 +232,24 @@ class ContactController extends Controller
             "message" => 'Trashed contacts have been cleared!',
         ], 204);
     }
+
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'contacts' => "required|array",
+            'contacts.*' => "numeric|exists:contacts,id"
+        ]);
+        Contact::destroy($request->contacts);
+        return response()->json([
+            "message" => 'bulked deleted contacts',
+        ], 204);
+    }
+
+    public function restoreAll()
+    {
+        Contact::onlyTrashed()->restore();
+        return response()->json([
+            'message' => 'deleted contacts have been restoered'
+        ]);
+    }
 }
