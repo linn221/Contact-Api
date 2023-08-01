@@ -1,5 +1,17 @@
 # Lara Contact Api
 
+## contacts
+### Bulk delete | `POST`
+```http
+http://127.0.0.1/api/v1/contact/bulk-delete
+```
+#### form-data
+| Key       | Value    | Description                |
+| :-------- | :------- | :------------------------- |
+|contacts | [13, 16] | array, contacts' ids|
+
+----------------------------------------------------------------
+
 ## Search contacts
 ### search by keyword | `GET`
 ```http
@@ -100,9 +112,15 @@ http://127.0.0.1/api/v1/favourite
 
 ----------------------------------------------------------------
 
-### Clear trashed contacts | `DELETE`
+### Empty trash | `DELETE`
 ```http
  http://127.0.0.1/api/v1/trashed-contact/reset
+```
+----------------------------------------------------------------
+
+### Restore trash bin | `GET`
+```http
+ http://127.0.0.1/api/v1/trashed-contact/restore
 ```
 ----------------------------------------------------------------
 
