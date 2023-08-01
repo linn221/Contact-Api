@@ -52,4 +52,12 @@ class FavouriteController extends Controller
             'message' => 'favourite deleted'
         ], 204);
     }
+
+    public function reset()
+    {
+        Auth()->user()->favourites()->delete();
+        return response()->json([
+            'message' => 'all favourites removed'
+        ], 204);
+    }
 }

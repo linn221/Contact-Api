@@ -35,7 +35,9 @@ Route::prefix("v1")->group(function () {
         Route::post("logout-all", [ApiAuthController::class, 'logoutAll']);
         Route::get("devices", [ApiAuthController::class, 'devices']);
 
+        Route::delete('favourite/reset', [FavouriteController::class, 'reset']);
         Route::apiResource('favourite', FavouriteController::class)->only(['index', 'store', 'destroy']);
+
         Route::get("search-history", [SearchRecordController::class, 'index']);
         Route::delete("search-history/{id}", [SearchRecordController::class, 'destroy']);
         Route::delete("search-history", [SearchRecordController::class, 'clear']);

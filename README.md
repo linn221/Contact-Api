@@ -23,7 +23,7 @@ DELETE  api://search-history/{{id}}
 
 ### clear search history
 ```http
-DELETE  api://search-history
+DELETE  api://search-history/reset
 ```
 
 ----------------------------------------------------------------
@@ -51,6 +51,13 @@ GET  api://favourite
 ### Remove favourite
 ```http
 DELETE  api://favourite/{{contact_id}}
+```
+
+----------------------------------------------------------------
+
+### Remove all favourites
+```http
+DELETE  api://favourite/reset
 ```
 
 ----------------------------------------------------------------
