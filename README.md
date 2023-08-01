@@ -3,27 +3,27 @@
 ## Search contacts
 ### search by keyword
 ```http
-GET  api://contact?keyword={{keyword}}
+GET  http://127.0.0.1/api/v1/contact?keyword={{keyword}}
 ```
 ----------------------------------------------------------------
 
 ### show search records
 ```http
-GET  api://search-history
+GET  http://127.0.0.1/api/v1/search-history
 ```
 
 ----------------------------------------------------------------
 
 ### delete search records
 ```http
-DELETE  api://search-history/{{id}}
+DELETE  http://127.0.0.1/api/v1/search-history/{{id}}
 ```
 
 ----------------------------------------------------------------
 
 ### clear search history
 ```http
-DELETE  api://search-history/reset
+DELETE  http://127.0.0.1/api/v1/search-history/reset
 ```
 
 ----------------------------------------------------------------
@@ -32,7 +32,7 @@ DELETE  api://search-history/reset
 ### Favourite a contact
 
 ```http
-POST  api://favourite
+POST  http://127.0.0.1/api/v1/favourite
 ```
 #### form-data
 | Key            | Value        | Description                |
@@ -43,21 +43,21 @@ POST  api://favourite
 
 ### List favourites
 ```http
-GET  api://favourite
+GET  http://127.0.0.1/api/v1/favourite
 ```
 
 ----------------------------------------------------------------
 
 ### Remove favourite
 ```http
-DELETE  api://favourite/{{contact_id}}
+DELETE  http://127.0.0.1/api/v1/favourite/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
 ### Remove all favourites
 ```http
-DELETE  api://favourite/reset
+DELETE  http://127.0.0.1/api/v1/favourite/reset
 ```
 
 ----------------------------------------------------------------
@@ -66,42 +66,42 @@ DELETE  api://favourite/reset
 
 ### List deleted contacts
 ```http
-GET  api://trashed-contact
+GET  http://127.0.0.1/api/v1/trashed-contact
 ```
 
 ----------------------------------------------------------------
 
 ### List contacts including deleted ones
 ```http
-GET  api://contact?trashed
+GET  http://127.0.0.1/api/v1/contact?trashed
 ```
 
 ----------------------------------------------------------------
 
 ### Show deleted contact
 ```http
-GET  api://trashed-contact/{{contact_id}}
+GET  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
 ### Restore deleted contact
 ```http
-GET  api://trashed-contact/{{contact_id}}
+GET  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
 ### Parmanently delete contact
 ```http
-DELETE  api://trashed-contact/{{contact_id}}
+DELETE  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
 ### Clear trashed contacts
 ```http
-DELETE  api://trashed-contact/reset
+DELETE  http://127.0.0.1/api/v1/trashed-contact/reset
 ```
 ----------------------------------------------------------------
 
@@ -109,7 +109,7 @@ DELETE  api://trashed-contact/reset
 
 ### request name
 ```http
-POST  api://f
+POST  http://127.0.0.1/api/v1/f
 ```
 #### form-data
 | Key       | Value    | Description                |
