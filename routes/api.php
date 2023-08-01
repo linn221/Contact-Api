@@ -51,6 +51,7 @@ Route::prefix("v1")->group(function () {
         Route::get('trashed-contact/{id}', [ContactController::class, 'trashedShow'])->name('trashed.show');
         Route::get('restore-contact/{id}', [ContactController::class, 'restore'])->name('trashed.restore');
         Route::delete('trashed-contact/{id}', [ContactController::class, 'forceDelete'])->name('trashed.destroy');
+        Route::delete('trashed-contact/reset', [ContactController::class, 'reset'])->name('trashed.reset');
     });
 
 

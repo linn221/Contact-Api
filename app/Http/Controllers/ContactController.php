@@ -215,4 +215,21 @@ class ContactController extends Controller
             "message" => 'Contact has been force deleted!',
         ], 204);
     }
+
+    public function reset()
+    {
+        $contact = Contact::onlyTrashed()->forceDelete();
+        // if (is_null($contact)) {
+        //     return response()->json([
+        //         // "success" => false,
+        //         "message" => "Contact not found or not soft deleted",
+
+        //     ], 404);
+        // }
+
+        // $contact->forceDelete();
+        return response()->json([
+            "message" => 'Trashed contacts have been cleared!',
+        ], 204);
+    }
 }
