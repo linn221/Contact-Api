@@ -1,28 +1,28 @@
 # Lara Contact Api
 
 ## Search contacts
-### search by keyword | ```http GET ```
+### search by keyword |`http GET`
 ```http
 http://127.0.0.1/api/v1/contact?keyword={{keyword}}
 ```
 
 ----------------------------------------------------------------
 
-### show search records | ```http GET ```
+### show search records |`http GET`
 ```http
 http://127.0.0.1/api/v1/search-history
 ```
 
 ----------------------------------------------------------------
 
-### delete search records | ```http DELETE ```
+### delete search records |`http DELETE`
 ```http
 http://127.0.0.1/api/v1/search-history/{{id}}
 ```
 
 ----------------------------------------------------------------
 
-### clear search history | ```http DELETE ```
+### clear search history |`http DELETE`
 ```http
  http://127.0.0.1/api/v1/search-history/reset
 ```
@@ -30,7 +30,7 @@ http://127.0.0.1/api/v1/search-history/{{id}}
 ----------------------------------------------------------------
 
 ## Favourites
-### Favourite a contact | ```http GET ```
+### Favourite a contact |`http GET`
 
 ```http
 http://127.0.0.1/api/v1/favourite
@@ -42,21 +42,21 @@ http://127.0.0.1/api/v1/favourite
 
 ----------------------------------------------------------------
 
-### List favourites | ```http GET ```
+### List favourites |`http GET`
 ```http
  http://127.0.0.1/api/v1/favourite
 ```
 
 ----------------------------------------------------------------
 
-### Remove favourite | ```http DELETE ```
+### Remove favourite |`http DELETE`
 ```http
  http://127.0.0.1/api/v1/favourite/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Remove all favourites | ```http DELETE ```
+### Remove all favourites |`http DELETE`
 ```http
  http://127.0.0.1/api/v1/favourite/reset
 ```
@@ -65,42 +65,42 @@ http://127.0.0.1/api/v1/favourite
 
 ## Soft deleting
 
-### List deleted contacts | ```http GET ```
+### List deleted contacts |`http GET`
 ```http
  http://127.0.0.1/api/v1/trashed-contact
 ```
 
 ----------------------------------------------------------------
 
-### List contacts including deleted ones | ```http GET ```
+### List contacts including deleted ones |`http GET`
 ```http
  http://127.0.0.1/api/v1/contact?trashed
 ```
 
 ----------------------------------------------------------------
 
-### Show deleted contact | ```http GET ```
+### Show deleted contact |`http GET`
 ```http
  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Restore deleted contact | ```http GET ```
+### Restore deleted contact |`http GET`
 ```http
  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Parmanently delete contact | ```http DELETE ```
+### Parmanently delete contact |`http DELETE`
 ```http
  http://127.0.0.1/api/v1/trashed-contact/{{contact_id}}
 ```
 
 ----------------------------------------------------------------
 
-### Clear trashed contacts | ```http DELETE ```
+### Clear trashed contacts |`http DELETE`
 ```http
  http://127.0.0.1/api/v1/trashed-contact/reset
 ```
