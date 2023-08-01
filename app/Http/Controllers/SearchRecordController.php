@@ -29,7 +29,7 @@ class SearchRecordController extends Controller
         ], 204);
     }
 
-    public function clear()
+    public function reset()
     {
         SearchRecord::where('user_id', Auth::id())->delete();
         return response()->json([

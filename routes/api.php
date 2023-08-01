@@ -29,24 +29,28 @@ Route::prefix("v1")->group(function () {
 
     Route::middleware('auth:sanctum')->group(function () {
 
-        Route::apiResource('contact', ContactController::class);
-
+        // Auth
         Route::post("logout", [ApiAuthController::class, 'logout']);
         Route::post("logout-all", [ApiAuthController::class, 'logoutAll']);
         Route::get("devices", [ApiAuthController::class, 'devices']);
 
-        Route::delete('favourite/reset', [FavouriteController::class, 'reset']);
+        // Contacts
+        Route::apiResource('contact', ContactController::class);
+
+        // Favourite
+        Route::delete('favourite/reset', [FavouriteController::class, 'reset'])->name('favourite.reset');
         Route::apiResource('favourite', FavouriteController::class)->only(['index', 'store', 'destroy']);
 
-        Route::get("search-history", [SearchRecordController::class, 'index']);
-        Route::delete("search-history/{id}", [SearchRecordController::class, 'destroy']);
-        Route::delete("search-history", [SearchRecordController::class, 'clear']);
-        
-        // routes for soft deleting action
-        Route::get('trashed-contact', [ContactController::class, 'trashedIndex']);
-        Route::get('trashed-contact/{id}', [ContactController::class, 'trashedShow']);
-        Route::get('restore-contact/{id}', [ContactController::class, 'restore']);
-        Route::delete('trashed-contact/{id}', [ContactController::class, 'forceDelete']);
+        // Search Records
+        Route::get("search-history", [SearchRecordController::class, 'index'])->name('search-history.index');
+        Route::delete("search-history/{id}", [SearchRecordController::class, 'destroy'])->name('search-history.destroy');
+        Route::delete("search-history/reset", [SearchRecordController::class, 'reset'])->name('search-history.reset');
+
+        // Soft Delete
+        Route::get('trashed-contact', [ContactController::class, 'trashedIndex'])->name('trashed.index');
+        Route::get('trashed-contact/{id}', [ContactController::class, 'trashedShow'])->name('trashed.show');
+        Route::get('restore-contact/{id}', [ContactController::class, 'restore'])->name('trashed.restore');
+        Route::delete('trashed-contact/{id}', [ContactController::class, 'forceDelete'])->name('trashed.destroy');
     });
 
 
