@@ -99,6 +99,12 @@ DELETE  api://trashed-contact/{{contact_id}}
 
 ----------------------------------------------------------------
 
+### Clear trashed contacts
+```http
+DELETE  api://trashed-contact/reset
+```
+----------------------------------------------------------------
+
 <!-- 
 
 ### request name
